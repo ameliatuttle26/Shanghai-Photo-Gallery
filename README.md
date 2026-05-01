@@ -1,21 +1,6 @@
-# 上海绿色空间摄影集 Shanghai Green Space Photo Gallery
+# Shanghai Green Space Photo Gallery 上海绿色空间摄影集
 
-[English below]
-
----
-
-## 中文
-
-这个摄影项目记录了上海的人工绿色空间——那些被设计出来、却让人感受到自然的地方。
-
-在自然资源有限的情况下，上海通过人为设计的绿色空间重新定义了"自然"，并将其转化为解决城市环境与社会问题的重要工具。街道两边的行道树、小区里的绿地、滨江的步行空间……这些地方虽然不是自然形成的，但已经融入了上海人的日常生活。
-
-这个项目想探讨的问题是：人工建造的绿色空间，是否也可以算是一种"自然"？
-
-**技术栈**
-- React + TypeScript
-- Vite
-- 自定义 CSS 动画与过渡效果
+[中文见下]
 
 ---
 
@@ -31,6 +16,21 @@ The central question this project explores: can a designed green space still cou
 - React + TypeScript
 - Vite
 - Custom CSS animations and transitions
+
+---
+
+## 中文
+
+这个摄影项目记录了上海的人工绿色空间——那些被设计出来、却让人感受到自然的地方。
+
+在自然资源有限的情况下，上海通过人为设计的绿色空间重新定义了"自然"，并将其转化为解决城市环境与社会问题的重要工具。街道两边的行道树、小区里的绿地、滨江的步行空间……这些地方虽然不是自然形成的，但已经融入了上海人的日常生活。
+
+这个项目想探讨的问题是：人工建造的绿色空间，是否也可以算是一种"自然"？
+
+**技术栈**
+- React + TypeScript
+- Vite
+- 自定义 CSS 动画与过渡效果
 
 ---
 
