@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
-import { ImageWithFallback } from './components/figma/ImageW';
+import { ImageWithFallback } from './components/ImageW';
 
 interface Photo {
   url: string;
@@ -18,24 +18,27 @@ const categories: Category[] = [
     id: 'category1',
     name: '大型设计公园',
     photos: [
-      { url: '/IMG_1577.jpeg', description: '照片 1', photographer: '唐诗涵' },
-      { url: '/IMG_1674.jpg', description: '照片 2', photographer: '唐诗涵' },
-    ]
+      { url: '/open_green_park.jpg', description: '照片 1', photographer: '小红书' },
+      { url: '/bike_path.jpeg', description: '照片 2', photographer: '唐诗涵' },
+      { url: '/park_path.jpeg', description: '照片 3', photographer: '唐诗涵' },
+      { url: '/park_water.jpeg', description: '照片 4', photographer: '唐诗涵' },
+      ]
   },
   {
     id: 'category2',
     name: '日常生活的绿色',
     photos: [
-      { url: '/IMG_1676.jpg', description: '照片 3', photographer: '唐诗涵' },
-      { url: '/IMG_1677.jpg', description: '照片 4', photographer: '唐诗涵' },
-    ]
+      { url: '/anfu_road_trees.jpg', description: '照片 1', photographer: '唐诗涵' },
+      { url: '/bridge_vines.jpeg', description: '照片 2', photographer: '唐诗涵' },
+      { url: '/road_trees.jpeg', description: '照片 3', photographer: '唐诗涵' },
+      { url: '/qiantan_road_trees.jpeg', description: '照片 4', photographer: '唐诗涵' },
+      ]
   },
   {
     id: 'category3',
     name: '滨水绿色空间',
     photos: [
-      { url: '/IMG_1678.jpg', description: '照片 5', photographer: '唐诗涵' },
-      { url: '/IMG_1679.jpg', description: '照片 6', photographer: '唐诗涵' },
+      { url: '/flowers.jpg', description: '照片 1', photographer: '小红书' },
     ]
   },
 ];
@@ -157,7 +160,7 @@ export default function App() {
         }
 
         .header-meta {
-          font-size: 0.65rem;
+          font-size: 0.8rem;
           letter-spacing: 0.2em;
           text-transform: uppercase;
           color: #6b6158;
@@ -208,7 +211,7 @@ export default function App() {
         .card:hover .card-overlay { opacity: 1; }
 
         .card-number {
-          font-size: 0.6rem;
+          font-size: 0.8rem;
           letter-spacing: 0.3em;
           text-transform: uppercase;
           color: #c4a882;
@@ -225,7 +228,7 @@ export default function App() {
         }
 
         .card-count {
-          font-size: 0.6rem;
+          font-size: 0.8rem;
           letter-spacing: 0.2em;
           color: #6b6158;
           margin-top: 6px;
@@ -269,7 +272,7 @@ export default function App() {
         }
 
         .lightbox-counter {
-          font-size: 0.6rem;
+          font-size: 0.8rem;
           letter-spacing: 0.25em;
           text-transform: uppercase;
           color: #6b6158;
@@ -281,7 +284,7 @@ export default function App() {
           border: none;
           color: #f2ece3;
           cursor: pointer;
-          font-size: 0.6rem;
+          font-size: 0.8rem;
           letter-spacing: 0.3em;
           text-transform: uppercase;
           padding: 8px 0;
@@ -328,14 +331,14 @@ export default function App() {
 
         .caption-text {
           font-family: 'Noto Serif SC', serif;
-          font-size: 0.95rem;
+          font-size: 1.5rem;
           font-weight: 300;
           color: #c4a882;
           margin-bottom: 4px;
         }
 
         .caption-author {
-          font-size: 0.6rem;
+          font-size: 0.8rem;
           letter-spacing: 0.2em;
           text-transform: uppercase;
           color: #6b6158;
@@ -440,7 +443,7 @@ export default function App() {
             <span className="lightbox-counter">
               {String(displayedIndex + 1).padStart(2, '0')} / {String(selectedCategory.photos.length).padStart(2, '0')}
             </span>
-            <button className="close-btn" onClick={closeGallery}>Close ×</button>
+            <button className="close-btn" onClick={closeGallery}>关闭 ×</button>
           </div>
 
           <div className="lightbox-main">
