@@ -18,7 +18,8 @@ const categories: Category[] = [
     id: 'category1',
     name: '大型设计公园',
     photos: [
-      { url: '/open_green_park.jpg', description: '照片 1', photographer: '小红书' },
+      { url: '/centruy.jpeg', description: '照片 1', photographer: '唐诗涵' },
+      { url: '/centurypark.jpeg', description: '照片 1', photographer: '唐诗涵' },
       { url: '/bike_path.jpeg', description: '照片 2', photographer: '唐诗涵' },
       { url: '/park_path.jpeg', description: '照片 3', photographer: '唐诗涵' },
       { url: '/park_water.jpeg', description: '照片 4', photographer: '唐诗涵' },
@@ -32,13 +33,18 @@ const categories: Category[] = [
       { url: '/bridge_vines.jpeg', description: '照片 2', photographer: '唐诗涵' },
       { url: '/road_trees.jpeg', description: '照片 3', photographer: '唐诗涵' },
       { url: '/qiantan_road_trees.jpeg', description: '照片 4', photographer: '唐诗涵' },
+      { url: '/under.jpeg', description: '照片 5', photographer: '唐诗涵' },
       ]
   },
   {
     id: 'category3',
     name: '滨水绿色空间',
     photos: [
-      { url: '/flowers.jpg', description: '照片 1', photographer: '小红书' },
+      { url: '/blossom.jpeg', description: '照片 1', photographer: '唐诗涵' },
+      { url: '/waterpark.jpeg', description: '照片 2', photographer: '唐诗涵' },
+      { url: '/sunset.jpeg', description: '照片 3', photographer: '唐诗涵' },
+      { url: '/yangpu.jpeg', description: '照片 4', photographer: '唐诗涵' },
+      { url: '/bridge.jpeg', description: '照片 5', photographer: '唐诗涵' }
     ]
   },
 ];
