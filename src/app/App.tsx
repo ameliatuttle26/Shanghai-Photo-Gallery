@@ -18,42 +18,43 @@ const categories: Category[] = [
     id: 'category1',
     name: '大型设计公园',
     photos: [
-      { url: '/centruy.jpeg', description: '照片 1', photographer: '唐诗涵' },
-      { url: '/centurypark.jpeg', description: '照片 1', photographer: '唐诗涵' },
-      { url: '/bike_path.jpeg', description: '照片 2', photographer: '唐诗涵' },
-      { url: '/park_path.jpeg', description: '照片 3', photographer: '唐诗涵' },
-      { url: '/park_water.jpeg', description: '照片 4', photographer: '唐诗涵' },
-      ]
+      { url: '/centruy.jpeg', description: '世纪公园', photographer: '唐诗涵' },
+      { url: '/centurypark.jpeg', description: '世纪公园', photographer: '唐诗涵' },
+      { url: '/bike_path.jpeg', description: '自行车道', photographer: '唐诗涵' },
+      { url: '/park_path.jpeg', description: '后滩公园小道', photographer: '唐诗涵' },
+      { url: '/park_water.jpeg', description: '后滩公园水景', photographer: '唐诗涵' },
+    ]
   },
   {
     id: 'category2',
     name: '日常生活的绿色',
     photos: [
-      { url: '/anfu_road_trees.jpg', description: '照片 1', photographer: '唐诗涵' },
-      { url: '/bridge_vines.jpeg', description: '照片 2', photographer: '唐诗涵' },
-      { url: '/road_trees.jpeg', description: '照片 3', photographer: '唐诗涵' },
-      { url: '/qiantan_road_trees.jpeg', description: '照片 4', photographer: '唐诗涵' },
-      { url: '/under.jpeg', description: '照片 5', photographer: '唐诗涵' },
-      ]
+      { url: '/anfu_road_trees.jpg', description: '安福路树木', photographer: '唐诗涵' },
+      { url: '/bridge_vines.jpeg', description: '桥上藤蔓', photographer: '唐诗涵' },
+      { url: '/road_trees.jpeg', description: '道路树木', photographer: '唐诗涵' },
+      { url: '/qiantan_road_trees.jpeg', description: '前滩路树木', photographer: '唐诗涵' },
+      { url: '/under.jpeg', description: '桥下的路边树木', photographer: '唐诗涵' },
+    ]
   },
   {
     id: 'category3',
     name: '滨水绿色空间',
     photos: [
-      { url: '/blossom.jpeg', description: '照片 1', photographer: '唐诗涵' },
-      { url: '/waterpark.jpeg', description: '照片 2', photographer: '唐诗涵' },
-      { url: '/sunset.jpeg', description: '照片 3', photographer: '唐诗涵' },
-      { url: '/yangpu.jpeg', description: '照片 4', photographer: '唐诗涵' },
-      { url: '/bridge.jpeg', description: '照片 5', photographer: '唐诗涵' }
+      { url: '/blossom.jpeg', description: '开花的树木', photographer: '唐诗涵' },
+      { url: '/waterpark.jpeg', description: '陆家嘴滨江公园', photographer: '唐诗涵' },
+      { url: '/sunset.jpeg', description: '世博公园滨江日落', photographer: '唐诗涵' },
+      { url: '/yangpu.jpeg', description: '杨浦滨江', photographer: '唐诗涵' },
+      { url: '/bridge.jpeg', description: '普陀滨江', photographer: '唐诗涵' }
     ]
   },
 ];
 
 export default function App() {
+  const [prologueOpen, setPrologueOpen] = useState(true);
+  const [lang, setLang] = useState<'zh' | 'en'>('zh');
   const [selectedCategory, setSelectedCategory] = useState<Category | null>(null);
   const [selectedPhotoIndex, setSelectedPhotoIndex] = useState(0);
   const [galleryVisible, setGalleryVisible] = useState(false);
-  // For crossfade: track displayed index separately from target
   const [displayedIndex, setDisplayedIndex] = useState(0);
   const [fading, setFading] = useState(false);
   const isAnimating = useRef(false);
@@ -70,26 +71,19 @@ export default function App() {
 
   const closeGallery = () => {
     setGalleryVisible(false);
-    setTimeout(() => {
-      setSelectedCategory(null);
-    }, 400);
+    setTimeout(() => { setSelectedCategory(null); }, 400);
   };
 
   const goToPhoto = (index: number) => {
     if (isAnimating.current || !selectedCategory) return;
     if (index === displayedIndex) return;
     isAnimating.current = true;
-    // Fade out
     setFading(true);
     setTimeout(() => {
-      // Swap image while invisible
       setDisplayedIndex(index);
       setSelectedPhotoIndex(index);
-      // Fade in
       setFading(false);
-      setTimeout(() => {
-        isAnimating.current = false;
-      }, 300);
+      setTimeout(() => { isAnimating.current = false; }, 300);
     }, 250);
   };
 
@@ -116,6 +110,10 @@ export default function App() {
 
   useEffect(() => {
     const handleKey = (e: KeyboardEvent) => {
+      if (prologueOpen) {
+        if (e.key === 'Escape') setPrologueOpen(false);
+        return;
+      }
       if (!selectedCategory) return;
       if (e.key === 'ArrowRight') nextPhoto();
       if (e.key === 'ArrowLeft') prevPhoto();
@@ -123,7 +121,7 @@ export default function App() {
     };
     window.addEventListener('keydown', handleKey);
     return () => window.removeEventListener('keydown', handleKey);
-  }, [selectedCategory, displayedIndex]);
+  }, [selectedCategory, displayedIndex, prologueOpen]);
 
   return (
     <>
@@ -165,6 +163,13 @@ export default function App() {
           color: #c4a882;
         }
 
+        .header-right {
+          display: flex;
+          flex-direction: column;
+          align-items: flex-end;
+          gap: 16px;
+        }
+
         .header-meta {
           font-size: 0.8rem;
           letter-spacing: 0.2em;
@@ -173,6 +178,146 @@ export default function App() {
           text-align: right;
           line-height: 1.8;
           font-family: 'DM Mono', monospace;
+        }
+
+        .prologue-btn {
+          background: none;
+          border: 1px solid #2e2a26;
+          color: #6b6158;
+          font-family: 'DM Mono', monospace;
+          font-size: 0.6rem;
+          letter-spacing: 0.2em;
+          text-transform: uppercase;
+          padding: 8px 16px;
+          cursor: pointer;
+          transition: border-color 0.2s, color 0.2s;
+        }
+
+        .prologue-btn:hover {
+          border-color: #c4a882;
+          color: #c4a882;
+        }
+
+        /* Prologue overlay — scrollable */
+        .prologue-overlay {
+          position: fixed;
+          inset: 0;
+          z-index: 200;
+          background: rgba(14, 12, 10, 0.97);
+          display: flex;
+          align-items: flex-start;
+          justify-content: center;
+          overflow-y: auto;
+          padding: 60px 40px;
+          opacity: 0;
+          pointer-events: none;
+          transition: opacity 0.5s ease;
+        }
+
+        .prologue-overlay.open {
+          opacity: 1;
+          pointer-events: all;
+        }
+
+        .prologue-box {
+          max-width: 780px;
+          width: 100%;
+          display: flex;
+          flex-direction: column;
+          gap: 32px;
+          padding-bottom: 60px;
+        }
+
+        .prologue-top-row {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+        }
+
+        .prologue-label {
+          font-family: 'DM Mono', monospace;
+          font-size: 0.6rem;
+          letter-spacing: 0.3em;
+          text-transform: uppercase;
+          color: #c4a882;
+        }
+
+        .lang-toggle {
+          display: flex;
+          border: 1px solid #2e2a26;
+        }
+
+        .lang-btn {
+          background: none;
+          border: none;
+          color: #6b6158;
+          font-family: 'DM Mono', monospace;
+          font-size: 0.6rem;
+          letter-spacing: 0.15em;
+          text-transform: uppercase;
+          padding: 6px 14px;
+          cursor: pointer;
+          transition: background 0.2s, color 0.2s;
+        }
+
+        .lang-btn.active {
+          background: #2e2a26;
+          color: #f2ece3;
+        }
+
+        .lang-btn:hover:not(.active) {
+          color: #c4a882;
+        }
+
+        .prologue-title {
+          font-family: 'Playfair Display', serif;
+          font-size: clamp(2rem, 5vw, 3.5rem);
+          font-weight: 900;
+          line-height: 1;
+          letter-spacing: -0.02em;
+          color: #f2ece3;
+        }
+
+        .prologue-title em {
+          font-style: italic;
+          color: #c4a882;
+        }
+
+        .prologue-divider {
+          width: 40px;
+          height: 1px;
+          background: #2e2a26;
+        }
+
+        .prologue-text {
+          font-family: 'Noto Serif SC', serif;
+          font-size: 1rem;
+          font-weight: 300;
+          line-height: 2;
+          color: #c8bfb4;
+        }
+
+        .prologue-text p + p {
+          margin-top: 1.2em;
+        }
+
+        .prologue-close {
+          align-self: flex-start;
+          background: none;
+          border: 1px solid #2e2a26;
+          color: #f2ece3;
+          font-family: 'DM Mono', monospace;
+          font-size: 0.6rem;
+          letter-spacing: 0.3em;
+          text-transform: uppercase;
+          padding: 12px 24px;
+          cursor: pointer;
+          transition: border-color 0.2s, color 0.2s;
+        }
+
+        .prologue-close:hover {
+          border-color: #c4a882;
+          color: #c4a882;
         }
 
         .grid {
@@ -185,7 +330,7 @@ export default function App() {
 
         .card {
           position: relative;
-          aspect-ratio: 3/4;
+          aspect-ratio: 5/6;
           overflow: hidden;
           cursor: pointer;
           background: #111;
@@ -268,6 +413,7 @@ export default function App() {
           padding: 24px 40px;
           border-bottom: 1px solid #2e2a26;
           flex-shrink: 0;
+          position: relative;
         }
 
         .lightbox-category {
@@ -283,6 +429,9 @@ export default function App() {
           text-transform: uppercase;
           color: #6b6158;
           font-family: 'DM Mono', monospace;
+          position: absolute;
+          left: 50%;
+          transform: translateX(-50%);
         }
 
         .close-btn {
@@ -415,12 +564,65 @@ export default function App() {
         }
       `}</style>
 
+      <div className={`prologue-overlay ${prologueOpen ? 'open' : ''}`}>
+        <div className="prologue-box">
+
+          <div className="prologue-top-row">
+            <div className="prologue-label">{lang === 'zh' ? '序言' : 'Prologue'}</div>
+            <div className="lang-toggle">
+              <button
+                className={`lang-btn ${lang === 'zh' ? 'active' : ''}`}
+                onClick={() => setLang('zh')}
+              >中文</button>
+              <button
+                className={`lang-btn ${lang === 'en' ? 'active' : ''}`}
+                onClick={() => setLang('en')}
+              >EN</button>
+            </div>
+          </div>
+
+          {lang === 'zh' ? (
+            <h2 className="prologue-title">上海的<br /><em>人工自然</em></h2>
+          ) : (
+            <h2 className="prologue-title">Shanghai's<br /><em>Man-made Nature</em></h2>
+          )}
+
+          <div className="prologue-divider" />
+
+          {lang === 'zh' ? (
+            <div className="prologue-text">
+              <p>上海的绿色空间常常被说"太人工"，这没有错。上海没有很多自然形成的风景。但这座城市种了很多树，建了很多公园，也在江边修了可以散步的地方。这让我想到一个问题：这样的地方，算不算"自然"？</p>
+              <p>这些照片是我在上海读书四年里拍的。刚来的时候，我一个人，什么都不了解，有时候感到很孤独。慢慢地，我发现散步成了我调整状态的方式，走过公园，沿着江边，走在有很多树的街道上。这些地方承载了我很多珍贵的时刻：和朋友一起走，一个人在雨天走路，冬天看到树枝光秃秃的，春天又看到它们重新开花。</p>
+              <p>后来我意识到，真正重要的不是那些大公园，而是每天都能看到的绿色：楼下的一棵树，路边的一片草地。这些地方不需要你专门去找，它们就在那里，已经成为日常生活的一部分。"真正"自然，而是我们是否应该重新思考"自然"的意义。</p>
+              <p>一开始我以为这个项目需要专门出去拍照，但后来发现，这四年里我已经拍下了很多。这些绿色空间早就融入了我的生活。我想通过这些照片，表达我对这些地方的感谢。也希望看到这些照片的人能感受到：自然是有价值的，就算它是人建造出来的。</p>
+            </div>
+          ) : (
+            <div className="prologue-text">
+              <p>This project documents Shanghai's green spaces. Shanghai is often criticized for having a landscaping style that feels artificial or man-made. Although the city doesn't have much naturally occurring landscape, it has built many parks, lined the streets with trees, and created riverside walkways. These spaces aren't just beautiful; they also help the city address environmental and everyday quality-of-life challenges.</p>
+              <p>These photos were taken over four years of studying in Shanghai. When I first arrived, I was alone and didn't know anything, and felt lonely at times. Gradually, I found that long walks became my way of coping, through parks, along the river, down streets lined with trees. These places held some of my most cherished moments: walking with friends, walking alone in the rain, watching branches go bare in winter and bloom again in spring.</p>
+              <p>I came to realize that it wasn't the big parks that mattered most, but the everyday green: the tree outside my building, the strip of grass along the road. These things don't need you to seek them out. They are just there, woven into everyday life.</p>
+              <p>At first, I thought this project would require me to go out and shoot specifically for it, but I realized that over four years, I had already been capturing it. These green spaces had long become part of my life. Through these photos, I want to express my gratitude for these places, and I hope that whoever sees them can feel it too: nature has value, even when it is built or designed by human hands.</p>
+            </div>
+          )}
+
+          <button className="prologue-close" onClick={() => setPrologueOpen(false)}>
+            {lang === 'zh' ? '进入画廊 →' : 'Enter Gallery →'}
+          </button>
+
+        </div>
+      </div>
+
       <div className="gallery-root">
         <header className="header">
           <h1 className="header-title">上海的<br /><em>人工自然</em></h1>
-          <div className="header-meta">
-            {categories.length} 个系列<br />
-            {categories.reduce((a, c) => a + c.photos.length, 0)} 张照片
+          <div className="header-right">
+            <div className="header-meta">
+              {categories.length} 个系列<br />
+              {categories.reduce((a, c) => a + c.photos.length, 0)} 张照片
+            </div>
+            <button className="prologue-btn" onClick={() => setPrologueOpen(true)}>
+              序言
+            </button>
           </div>
         </header>
 
